@@ -1,8 +1,8 @@
 # MANUAL
 ## Prerequisites
-  - Git
-  - Docker
-  - Node
+  - Git: https://git-scm.com/downloads
+  - Docker: https://www.docker.com/products/docker-desktop/
+  - Node: https://nodejs.org/en/
 
 ## Steps to start the app (for windows)
 
