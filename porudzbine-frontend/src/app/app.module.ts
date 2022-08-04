@@ -7,10 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { MatInputModule } from '@angular/material/input';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000' };
 
 @NgModule({
   declarations: [
@@ -22,8 +20,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000' };
     BrowserAnimationsModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule,
-    SocketIoModule.forRoot(config)
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
