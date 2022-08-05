@@ -1,5 +1,4 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import pgp from 'pg-promise';
 
 const pgInit = pgp();
@@ -8,7 +7,7 @@ const pgInit = pgp();
 // https://docs.nestjs.com/fundamentals/custom-providers#non-class-based-provider-tokens
 export const PG_CONNECTION = "PG_CONNECTION";
 
-const dbProvider = {
+export const dbProvider = {
   provide: PG_CONNECTION,
   useFactory: (configService: ConfigService) => pgInit({
     password: configService.get("DB_PASSWORD") || "test",
@@ -19,9 +18,3 @@ const dbProvider = {
   }),
   inject: [ConfigService]
 }
-
-@Module({
-  providers: [dbProvider],
-  exports: [dbProvider]
-})
-export class DatabaseModule {}
