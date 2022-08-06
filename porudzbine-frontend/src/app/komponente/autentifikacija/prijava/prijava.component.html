@@ -1,0 +1,18 @@
+<app-omotac-forme>
+  <form (ngSubmit)="prijaviKorisnika()" [formGroup]="formaZaPrijavu">
+    <h1>Prijava</h1>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="email adresa" formControlName="email">
+      <mat-error *ngIf="email.invalid">Mora imati email format</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Sifra</mat-label>
+      <input matInput type="password" placeholder="sifra" formControlName="sifra">
+      <mat-error *ngIf="sifra.invalid">Obavezno polje</mat-error>
+    </mat-form-field>
+    <div class="desno-poravnanje">
+      <button mat-flat-button type="submit" color="primary" [disabled]="!formaZaPrijavu.valid">Prijavi se</button>
+    </div>
+  </form>
+</app-omotac-forme>

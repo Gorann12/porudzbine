@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PrijavaComponent } from './komponente/autentifikacija/prijava/prijava.component';
+import { RegistracijaComponent } from './komponente/autentifikacija/registracija/registracija.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'prijava', component: PrijavaComponent },
+  { path: 'registracija', component: RegistracijaComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

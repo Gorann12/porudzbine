@@ -1,0 +1,16 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.link {
+  font-size: 1.1rem;
+  font-weight: 400;
+
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+
+.active-route {
+  color: rgb(0, 255, 195);
+}

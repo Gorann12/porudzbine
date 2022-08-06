@@ -7,19 +7,10 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  niz: Array<string> = [];
-  testForma = this.fb.group({
-    vreme: ['12:00'],
-    opis: ['', [Validators.required, Validators.maxLength(10)]]
-  })
 
-  constructor(private fb: FormBuilder) {}
+  constructor() {}
 
   ngOnInit() {
 
-  }
-
-  predajVrednost() {
-    alert(`Uspesno ste ispunili formu: ${this.testForma.value.opis} - ${this.testForma.value.vreme}`)
   }
 }

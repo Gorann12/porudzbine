@@ -1,0 +1,17 @@
+<!-- Ideja: Napravi zasebne komponente, admin meni, gost meni, 
+  korisnik meni i onda ih ovde kondicionalno prikazi, da razvezemo sve te uslove -->
+<mat-toolbar color="primary">
+  <app-container>
+    <mat-toolbar-row>
+      <a routerLink="/">Restoran</a>
+      <span class="spacer"></span>
+      <div class="link-group">
+        <a routerLink="/" class="link" routerLinkActive="active-route" [routerLinkActiveOptions]="{ exact: true }">Meni</a>
+        <a routerLink="/prijava" class="link" routerLinkActive="active-route"
+          [routerLinkActiveOptions]="{ exact: true }">Prijava</a>
+        <a routerLink="/registracija" class="link" routerLinkActive="active-route"
+          [routerLinkActiveOptions]="{ exact: true }">Registracija</a>
+      </div>
+    </mat-toolbar-row>
+  </app-container>
+</mat-toolbar>
