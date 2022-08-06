@@ -8,9 +8,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class RegistracijaComponent implements OnInit {
   formaZaRegistraciju = this.fb.group({
-    ime: ['', [Validators.minLength(5), Validators.maxLength(40), Validators.required]],
+    ime: ['', [Validators.minLength(5), Validators.maxLength(50), Validators.required]],
     email: ['', [Validators.email, Validators.required]],
-    sifra: ['', [Validators.minLength(8), Validators.required]]
+    sifra: ['', [Validators.minLength(8), Validators.maxLength(50), Validators.required]]
   })
 
   constructor(private fb: FormBuilder) { }
