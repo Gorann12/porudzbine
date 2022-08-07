@@ -13,7 +13,7 @@ export class KorisnikRepository extends BaseRepository {
 
   async dajKorisnike() {
     return await super.izvrsiUpitVratiVise<Omit<Korisnik, 'sifra'>>(
-      'SELECT id, ime, email, uloga FROM users WHERE id > $1',
+      'SELECT id, ime, email, uloga, sifra FROM users WHERE id > $1',
       [1],
     );
   }

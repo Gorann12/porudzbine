@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { KorisnikRepository } from "src/repository/korisnik.repository";
 import { Kredencijali } from "src/utils/tipovi";
-import { compare } from "bcrypt";
+import { compare, hash } from "bcrypt";
 import { Korisnik } from "src/modeli/korisnik.model";
 
 @Injectable()
@@ -30,7 +30,9 @@ export class KorisnikService {
   }
 
   async registrujKorisnika(podaci: Omit<Korisnik, "id">) {
-    await this.korisnikRepo.kreirajKorisnika(podaci);
+    const hashSifre = await hash(podaci.sifra, 10);
+    await this.korisnikRepo.kreirajKorisnika({ ...podaci, sifra: hashSifre });
+    
     const kreiraniKorisnik = await this.korisnikRepo.dajKorisnikaPoEmailu(podaci.email);
 
     if(!kreiraniKorisnik) {

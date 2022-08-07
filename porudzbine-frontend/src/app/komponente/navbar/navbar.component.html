@@ -1,17 +1,11 @@
-<!-- Ideja: Napravi zasebne komponente, admin meni, gost meni, 
-  korisnik meni i onda ih ovde kondicionalno prikazi, da razvezemo sve te uslove -->
 <mat-toolbar color="primary">
-  <app-container>
-    <mat-toolbar-row>
-      <a routerLink="/">Restoran</a>
-      <span class="spacer"></span>
-      <div class="link-group">
-        <a routerLink="/" class="link" routerLinkActive="active-route" [routerLinkActiveOptions]="{ exact: true }">Meni</a>
-        <a routerLink="/prijava" class="link" routerLinkActive="active-route"
-          [routerLinkActiveOptions]="{ exact: true }">Prijava</a>
-        <a routerLink="/registracija" class="link" routerLinkActive="active-route"
-          [routerLinkActiveOptions]="{ exact: true }">Registracija</a>
-      </div>
-    </mat-toolbar-row>
-  </app-container>
+  <mat-toolbar-row class="container">
+    <a routerLink="/">Restoran</a>
+    <span class="spacer"></span>
+    <div class="link-group">
+      <app-navbar-gost *ngIf="daLiKorisnikImaUlogu('GOST')"></app-navbar-gost>
+      <app-navbar-korisnik *ngIf="daLiKorisnikImaUlogu('KORISNIK')" [korisnik]="korisnik" (odjava)="odjaviKorisnika()"></app-navbar-korisnik>
+      <app-navbar-admin *ngIf="daLiKorisnikImaUlogu('ADMIN')" [korisnik]="korisnik" (odjava)="odjaviKorisnika()"></app-navbar-admin>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
