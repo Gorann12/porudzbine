@@ -6,14 +6,36 @@ import { BaseRepository } from "./base.repository";
 
 @Injectable()
 export class KorisnikRepository extends BaseRepository {
+  
   constructor(@Inject(PG_CONNECTION) baza: IDatabase<any>) {
     super(baza);
   }
 
   async dajKorisnike() {
     return await super.izvrsiUpitVratiVise<Omit<Korisnik, 'sifra'>>(
-      'SELECT $1:name FROM users WHERE id > $2',
-      [['id', 'ime', 'email', 'uloga'], 1],
+      'SELECT id, ime, email, uloga FROM users WHERE id > $1',
+      [1],
     );
+  }
+
+  async dajKorisnikaPoId(id: number) {
+    return await super.izvrsiUpitVratiJedan<Korisnik>(
+      'SELECT * FROM users WHERE id = $1',
+      [id]
+    )
+  }
+
+  async dajKorisnikaPoEmailu(email: string) {
+    return await super.izvrsiUpitVratiJedan<Korisnik>(
+      'SELECT * FROM users WHERE email = $1',
+      [email]
+    )
+  }
+
+  async kreirajKorisnika(podaci: Omit<Korisnik, "id">) {
+    return await super.izvrsiUpitVratiJedan<Korisnik>(
+      'INSERT INTO users ($1:name) VALUES($1:csv)',
+      [podaci]
+    )
   }
 }
