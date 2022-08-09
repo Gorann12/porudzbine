@@ -14,7 +14,7 @@ import { Kredencijali } from 'src/app/tipovi';
 export class PrijavaComponent implements OnInit {
   ucitavanje = false;
   formaZaPrijavu = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', Validators.required],
     sifra: ['', Validators.required],
   });
 
