@@ -13,28 +13,28 @@ export class KorisnikRepository extends BaseRepository {
 
   async dajKorisnike() {
     return await super.izvrsiUpitVratiVise<Omit<Korisnik, 'sifra'>>(
-      'SELECT id, ime, email, uloga, sifra FROM users WHERE id > $1',
+      'SELECT id, ime, email, uloga, sifra FROM korisnik WHERE id > $1',
       [1],
     );
   }
 
   async dajKorisnikaPoId(id: number) {
     return await super.izvrsiUpitVratiJedan<Korisnik>(
-      'SELECT * FROM users WHERE id = $1',
+      'SELECT * FROM korisnik WHERE id = $1',
       [id]
     )
   }
 
   async dajKorisnikaPoEmailu(email: string) {
     return await super.izvrsiUpitVratiJedan<Korisnik>(
-      'SELECT * FROM users WHERE email = $1',
+      'SELECT * FROM korisnik WHERE email = $1',
       [email]
     )
   }
 
   async kreirajKorisnika(podaci: Omit<Korisnik, "id">) {
     return await super.izvrsiUpitVratiJedan<Korisnik>(
-      'INSERT INTO users ($1:name) VALUES($1:csv)',
+      'INSERT INTO korisnik ($1:name) VALUES($1:csv)',
       [podaci]
     )
   }
