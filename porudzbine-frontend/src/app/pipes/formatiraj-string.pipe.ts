@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FormatirajStringPipe implements PipeTransform {
 
-  transform(value: string): string {
+  transform(value: string | null): string {
     if(!value) return '/';
     else return value;
   }

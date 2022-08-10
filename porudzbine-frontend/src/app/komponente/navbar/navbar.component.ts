@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { KorisnikService } from 'src/app/servisi/korisnik.service';
 import { Korisnik } from 'src/app/tipovi';
@@ -12,12 +13,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private supskripcija: Subscription;
   korisnik: Korisnik | null;
 
-  constructor(private korisnikServis: KorisnikService) { }
+  constructor(private korisnikServis: KorisnikService, private router: Router) { }
 
   ngOnInit(): void {
     this.supskripcija = this.korisnikServis.dajKorisnika().subscribe({
       next: (data) => {
-        console.log("FROM NAVBAR WITH LOVE", data);
         this.korisnik = data;
       }
     })
@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   odjaviKorisnika() {
     this.korisnikServis.odjaviKorisnika();
+    this.router.navigate(['']);
   }
 
   ngOnDestroy(): void {

@@ -9,9 +9,9 @@
     <th class="mat-header-cell">Porcija</th>
     <th class="mat-header-cell">Cena</th>
     <th class="mat-header-cell">Kategorija</th>
-    <th class="mat-header-cell">Opis</th>
+    <th class="mat-header-cell">Opis kategorije</th>
     <th class="mat-header-cell">Rok narucivanja</th>
-    <!-- <th class="mat-header-cell center">Akcije</th> -->
+    <th class="mat-header-cell center" *ngIf="daLiJeKorisnikAdmin()">Akcije</th>
    </tr>
    <tr class="mat-row" *ngFor="let jelo of filtriranaJela">
     <td class="mat-cell">{{ jelo.naziv }}</td>
@@ -21,12 +21,10 @@
     <td class="mat-cell">{{ jelo.kategorija.naziv | formatirajString }}</td>
     <td class="mat-cell">{{ jelo.kategorija.opis | formatirajString }}</td>
     <td class="mat-cell">{{ jelo.kategorija.rok | formatirajString }}</td>
-    <!-- <td class="mat-cell">
-      <button mat-button color="primary">Azuriraj</button>
-      <button mat-button color="warn">Izbrisi</button>
-    </td> -->
+    <td class="mat-cell" *ngIf="daLiJeKorisnikAdmin()">
+      <button mat-button color="primary" (click)="azuriraj(jelo.id)">Azuriraj</button>
+      <button mat-button color="warn" (click)="izbrisi(jelo.id)">Izbrisi</button>
+    </td>
    </tr>
   </table>
-  
-  
 </main>

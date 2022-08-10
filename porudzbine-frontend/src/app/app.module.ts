@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatMenuModule } from '@angular/material/menu'; 
+import { MatSelectModule } from '@angular/material/select'; 
 
 import { PrijavaComponent } from './komponente/autentifikacija/prijava/prijava.component';
 import { RegistracijaComponent } from './komponente/autentifikacija/registracija/registracija.component';
@@ -29,6 +30,7 @@ import { KorisnikService } from './servisi/korisnik.service';
 import { catchError, Observable, of } from 'rxjs';
 import { MeniComponent } from './komponente/meni/meni.component';
 import { FormatirajStringPipe } from './pipes/formatiraj-string.pipe';
+import { JeloFormaComponent } from './komponente/jelo-forma/jelo-forma.component';
 
 function initializeAppFactory(korisnikServis: KorisnikService): () => Observable<any> {
   return () => korisnikServis.inicijalizujKorisnika().pipe(catchError((err) => {
@@ -48,6 +50,7 @@ function initializeAppFactory(korisnikServis: KorisnikService): () => Observable
     NavbarGostComponent,
     MeniComponent,
     FormatirajStringPipe,
+    JeloFormaComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ function initializeAppFactory(korisnikServis: KorisnikService): () => Observable
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

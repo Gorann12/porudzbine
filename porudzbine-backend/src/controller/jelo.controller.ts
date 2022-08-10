@@ -61,4 +61,15 @@ export class JeloController {
       throw new BadRequestException(e.message);
     }
   }
+
+  @Get('/:id')
+  async dajJeloPoId(
+    @Param('id', ParseIntPipe) id: number
+  ) {
+    try {
+      return await this.jeloService.dajJeloPoId(id);
+    } catch(e) {
+      throw new BadRequestException(e.message);
+    }
+  }
 }

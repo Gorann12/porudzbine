@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, tap } from 'rxjs';
-import { AuthResponse, Korisnik, Kredencijali, UlogaKorisnika } from '../tipovi';
+import { BehaviorSubject, tap } from 'rxjs';
+import { AuthResponse, Korisnik, Kredencijali } from '../tipovi';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

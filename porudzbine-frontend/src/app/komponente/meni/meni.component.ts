@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { JeloService } from 'src/app/servisi/jelo.service';
+import { KorisnikService } from 'src/app/servisi/korisnik.service';
 import { Jelo } from 'src/app/tipovi';
 
 @Component({
@@ -14,7 +16,12 @@ export class MeniComponent implements OnInit {
   filtriranaJela: Jelo[] = [];
   ucitavanje = true;
 
-  constructor(private jeloServis: JeloService, private snackBar: MatSnackBar) {}
+  constructor(
+    private jeloServis: JeloService,
+    private snackBar: MatSnackBar,
+    private korisnikService: KorisnikService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.jeloServis
@@ -35,18 +42,32 @@ export class MeniComponent implements OnInit {
       });
   }
 
-  azuriraj(jelo: Jelo) {
-    console.log("JELO", jelo);
+  azuriraj(id: number) {
+    this.router.navigate(['/jelo', 'azuriraj', id]);
+  }
+
+  izbrisi(id: number) {
+    console.log("IZBRISANO JELO", id);
+  }
+
+  daLiJeKorisnikAdmin() {
+    return this.korisnikService.daLiKorisnikImaUlogu("ADMIN");
+  }
+
+  daLiJeKorisnikUlogovan() {
+    return this.korisnikService.daLiKorisnikImaUlogu("KORISNIK");
   }
 
   filtriraj(evt: Event) {
     const inputZaFiltriranje = evt.target as HTMLInputElement;
     const vrednost = inputZaFiltriranje.value.toLowerCase();
 
-    if(vrednost === "") {
+    if (vrednost === '') {
       this.filtriranaJela = [...this.jela];
     }
 
-    this.filtriranaJela = this.jela.filter(jelo => jelo.naziv.toLowerCase().includes(vrednost))
+    this.filtriranaJela = this.jela.filter((jelo) =>
+      jelo.naziv.toLowerCase().includes(vrednost)
+    );
   }
 }

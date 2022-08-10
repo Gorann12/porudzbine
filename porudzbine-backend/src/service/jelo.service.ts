@@ -22,4 +22,14 @@ export class JeloService {
   async izbrisiJelo(id: number) {
     return this.jeloRepo.izbrisiJelo(id);
   }
+
+  async dajJeloPoId(id: number) {
+    const jelo = await this.jeloRepo.dajJeloPoId(id);
+
+    if(!jelo) {
+      throw new Error(`Ne postoji jelo sa ovim ID-jem (${id})`);
+    }
+
+    return jelo;
+  }
 }

@@ -4,7 +4,9 @@ export interface Jelo {
   id: number;
   naziv: string;
   sastojci: string;
-  porcija: string;
+  porcija: string | null;
   cena: number;
   kategorija: Kategorija;
 }
+
+export type NeprosirenoJelo = Omit<Jelo, "kategorija"> & { kategorijaId: number }

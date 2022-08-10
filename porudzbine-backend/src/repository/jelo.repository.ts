@@ -42,4 +42,13 @@ export class JeloRepository extends BaseRepository {
       [id]
     )
   }
+
+  async dajJeloPoId(id: number) {
+    const jelo = await super.izvrsiUpitVratiJedan<JeloDbModel>(
+      'SELECT * FROM jelo WHERE jelo_id = $1',
+      [id]
+    )
+  
+    return this.adapter.konvertuj(jelo);
+  }
 }
