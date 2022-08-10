@@ -1,6 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { IDatabase } from "pg-promise";
-import { Jelo } from "src/modeli/jelo.model";
 import { NeprosirenoJelo } from "src/utils/tipovi";
 import { PG_CONNECTION } from "../database/db.provider";
 import { JeloDbAdapter } from "./adapter/jelo.db.adapter";
