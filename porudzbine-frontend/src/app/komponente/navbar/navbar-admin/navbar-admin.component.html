@@ -1,2 +1,6 @@
-<a routerLink="/" class="link" routerLinkActive="active-route" [routerLinkActiveOptions]="{ exact: true }">Meni / admin</a>
+<a routerLink="/" class="link" routerLinkActive="active-route" [routerLinkActiveOptions]="{ exact: true }">Meni</a>
+<button mat-button [matMenuTriggerFor]="menu" class="link">Kreiraj</button>
+<mat-menu #menu="matMenu">
+  <a routerLink="/jelo/kreiraj" routerLinkActive="active-route-white" mat-menu-item>Jelo</a>
+</mat-menu>
 <a class="link" (click)="odjaviKorisnika()">Odjavi se ({{ korisnik?.ime }})</a>

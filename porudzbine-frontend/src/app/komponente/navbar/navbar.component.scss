@@ -3,7 +3,7 @@
 }
 
 .link {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
   cursor: pointer;
 
@@ -14,4 +14,8 @@
 
 .active-route {
   color: rgb(0, 255, 195);
+}
+
+.active-route-white {
+  background-color: rgba(0, 255, 195, .15);
 }

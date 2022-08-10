@@ -7,7 +7,8 @@ import { MeniComponent } from './komponente/meni/meni.component';
 const routes: Routes = [
   { path: '', component: MeniComponent },
   { path: 'prijava', component: PrijavaComponent },
-  { path: 'registracija', component: RegistracijaComponent }
+  { path: 'registracija', component: RegistracijaComponent },
+  { path: 'jelo/kreiraj', component: MeniComponent }
 ];
 
 @NgModule({
