@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { JeloService } from 'src/app/servisi/jelo.service';
 import { KorisnikService } from 'src/app/servisi/korisnik.service';
 import { Jelo } from 'src/app/tipovi';
+import { DialogPotvrdaComponent } from '../deljene/dialog-potvrda/dialog-potvrda.component';
 
 @Component({
   selector: 'app-meni',
@@ -20,7 +22,8 @@ export class MeniComponent implements OnInit {
     private jeloServis: JeloService,
     private snackBar: MatSnackBar,
     private korisnikService: KorisnikService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +50,22 @@ export class MeniComponent implements OnInit {
   }
 
   izbrisi(id: number) {
-    console.log("IZBRISANO JELO", id);
+    const dialogRef = this.dialog.open(DialogPotvrdaComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        const backup = [...this.jela];
+        this.jeloServis.izbrisiJelo(id).subscribe({
+          error: (err) => {
+            this.jela = backup;
+            this.snackBar.open(err.message, 'skloni', { duration: 5000 })
+          }
+        })
+
+        this.jela = this.jela.filter(jelo => jelo.id !== id);
+        this.filtriranaJela = this.filtriranaJela.filter(jelo => jelo.id !== id);
+      }
+    });
   }
 
   daLiJeKorisnikAdmin() {

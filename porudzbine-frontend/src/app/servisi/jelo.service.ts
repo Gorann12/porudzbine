@@ -26,6 +26,26 @@ export class JeloService {
     });
   }
 
+  azurirajJelo(id: number, jelo: Omit<NeprosirenoJelo, 'id'>) {
+    const token = this.korisnikServis.dajToken();
+
+    return this.http.put(`${this.rootUrl}/${id}`, jelo, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+
+  izbrisiJelo(id: number) {
+    const token = this.korisnikServis.dajToken();
+
+    return this.http.delete(`${this.rootUrl}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+
   dajJeloPoId(id: number) {
     return this.http.get(`${this.rootUrl}/${id}`);
   }

@@ -1,7 +1,7 @@
 <mat-spinner class="absolute-center" *ngIf="ucitavanje"></mat-spinner>
 <app-omotac-forme *ngIf="!ucitavanje">
-  <form (ngSubmit)="kreirajJelo()" [formGroup]="forma">
-    <h1>Kreiraj Jelo</h1>
+  <form (ngSubmit)="upsertJelo()" [formGroup]="forma">
+    <h1>{{ idJela !== null ? 'Azuriraj' : 'Kreiraj' }} Jelo</h1>
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Naziv</mat-label>
       <input matInput type="text" formControlName="naziv">
@@ -30,7 +30,7 @@
       <mat-error *ngIf="kategorijaId.invalid">Obavezno polje</mat-error>
     </mat-form-field>
     <div class="desno-poravnanje">
-      <button mat-flat-button type="submit" color="primary" [disabled]="!forma.valid">Kreiraj</button>
+      <button mat-flat-button type="submit" color="primary" [disabled]="!forma.valid">Potvrdi</button>
     </div>
   </form>
 </app-omotac-forme>

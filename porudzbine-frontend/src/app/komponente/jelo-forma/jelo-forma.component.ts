@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, forkJoin } from 'rxjs';
 import { JeloService } from 'src/app/servisi/jelo.service';
 import { KategorijaService } from 'src/app/servisi/kategorija.service';
@@ -29,7 +29,8 @@ export class JeloFormaComponent implements OnInit {
     private kategorijaServis: KategorijaService,
     private snackBar: MatSnackBar,
     private jeloServis: JeloService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +57,7 @@ export class JeloFormaComponent implements OnInit {
         if(vrednost.length === 2) {
           const jelo = vrednost[1] as Jelo;
           this.forma.setValue({
-            cena: jelo.cena,
+            cena: +jelo.cena,
             kategorijaId: jelo.kategorija.id.toString(),
             naziv: jelo.naziv,
             porcija: jelo.porcija,
@@ -71,7 +72,7 @@ export class JeloFormaComponent implements OnInit {
     })
   }
 
-  kreirajJelo() {
+  upsertJelo() {
     if (this.forma.invalid) {
       return;
     }
@@ -86,18 +87,29 @@ export class JeloFormaComponent implements OnInit {
     const vrednost = {
       ...this.forma.value,
       kategorijaId: idKategorije,
-    };
+    } as Omit<NeprosirenoJelo, 'id'>;
 
     this.ucitavanje = true;
-    this.jeloServis.kreirajJelo(vrednost as Omit<NeprosirenoJelo, "id">).pipe(
+    const observable =
+      this.idJela !== null
+        ? this.jeloServis.azurirajJelo(this.idJela, vrednost)
+        : this.jeloServis.kreirajJelo(vrednost);
+
+    observable.pipe(
       finalize(() => {
         this.ucitavanje = false;
       })
     )
     .subscribe({
       next: () => {
-        this.snackBar.open('Uspesno ste kreirali jelo!', 'skloni', { duration: 3000 });
-        this.forma.reset();
+        const daLiJeEditMod = this.idJela !== null;
+
+        if(!daLiJeEditMod) {
+          this.snackBar.open('Uspesno ste kreirali jelo!', 'skloni', { duration: 3000 });
+          this.forma.reset();
+        } else {
+          this.router.navigate(['']);
+        }
       },
       error: (e) => {
         const poruka = e.error.message;
