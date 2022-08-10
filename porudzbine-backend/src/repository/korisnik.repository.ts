@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { IDatabase } from "pg-promise";
 import { Korisnik } from "src/modeli/korisnik.model";
 import { PG_CONNECTION } from "../database/db.provider";
-import { KorisnikDbAdapter } from "./adapter/korisnik_db.adapter";
+import { KorisnikDbAdapter } from "./adapter/korisnik.db.adapter";
 import { BaseRepository } from "./base.repository";
 import { KorisnikDbModel } from "./tipovi";
 

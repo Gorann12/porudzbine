@@ -1,6 +1,6 @@
 import { Kategorija } from "./kategorija.model";
 
-interface Jelo {
+export interface Jelo {
   id: number;
   naziv: string;
   sastojci: string;
