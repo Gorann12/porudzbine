@@ -19,7 +19,7 @@ CREATE TABLE jelo (
     jelo_naziv TEXT NOT NULL,
     jelo_sastojci TEXT NOT NULL,
     jelo_porcija TEXT NULL,
-    jelo_cena DECIMAL,
+    jelo_cena DECIMAL NOT NULL,
     kategorija_id INT NOT NULL,
 
     CONSTRAINT fk_kategorija
