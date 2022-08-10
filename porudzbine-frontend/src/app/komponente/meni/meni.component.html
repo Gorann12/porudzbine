@@ -1,0 +1,32 @@
+<mat-spinner *ngIf="ucitavanje" class="absolute-center"></mat-spinner>
+<main class="container mt-sm" *ngIf="!ucitavanje">
+  <h1>Meni</h1>
+  <input class="custom-input" type="text" placeholder="Filtriraj po nazivu" (input)="filtriraj($event)">
+  <table class="mat-table mt-xs" style="width: 100%;">
+   <tr class="mat-header-row">
+    <th class="mat-header-cell">Naziv</th>
+    <th class="mat-header-cell">Sastojci</th>
+    <th class="mat-header-cell">Porcija</th>
+    <th class="mat-header-cell">Cena</th>
+    <th class="mat-header-cell">Kategorija</th>
+    <th class="mat-header-cell">Opis</th>
+    <th class="mat-header-cell">Rok narucivanja</th>
+    <!-- <th class="mat-header-cell center">Akcije</th> -->
+   </tr>
+   <tr class="mat-row" *ngFor="let jelo of filtriranaJela">
+    <td class="mat-cell">{{ jelo.naziv }}</td>
+    <td class="mat-cell">{{ jelo.sastojci }}</td>
+    <td class="mat-cell">{{ jelo.porcija | formatirajString }}</td>
+    <td class="mat-cell">{{ jelo.cena }}</td>
+    <td class="mat-cell">{{ jelo.kategorija.naziv | formatirajString }}</td>
+    <td class="mat-cell">{{ jelo.kategorija.opis | formatirajString }}</td>
+    <td class="mat-cell">{{ jelo.kategorija.rok | formatirajString }}</td>
+    <!-- <td class="mat-cell">
+      <button mat-button color="primary">Azuriraj</button>
+      <button mat-button color="warn">Izbrisi</button>
+    </td> -->
+   </tr>
+  </table>
+  
+  
+</main>

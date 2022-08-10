@@ -60,4 +60,8 @@ export class KorisnikService {
     this.ulogovaniKorisnik = null;
     this.ulogovaniKorisnikSub.next(null)
   }
+
+  dajToken() {
+    return localStorage.getItem('token');
+  }
 }
