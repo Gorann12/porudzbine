@@ -4,7 +4,7 @@ import { Korisnik } from "./korisnik.model";
 export interface Porudzbina {
   id: number;
   opis: string | null;
-  korisnik: Korisnik;
+  korisnik: Omit<Korisnik, 'sifra'>;
   status: StatusPorudzbine;
   kreirana: string;
   jela: Pick<Jelo, "cena" | "naziv">[]

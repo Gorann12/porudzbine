@@ -71,4 +71,5 @@ INSERT INTO porudzbina (porudzbina_opis, porudzbina_korisnik_id)
 INSERT INTO porudzbina_jelo (pj_porudzbina_id, pj_jelo_id, pj_jelo_cena, pj_jelo_naziv)
     VALUES (1, 1, 300, 'Jaja i slanine'),
            (2, 2, 1250.50, 'Jagnjetina ispod saca'),
-           (3, 2, 125, 'Supa');
+           (3, 2, 125, 'Supa'),
+           (3, 2, 125, 'Jaja i slanine');

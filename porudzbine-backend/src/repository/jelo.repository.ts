@@ -45,10 +45,19 @@ export class JeloRepository extends BaseRepository {
 
   async dajJeloPoId(id: number) {
     const jelo = await super.izvrsiUpitVratiJedan<JeloDbModel>(
-      'SELECT * FROM jelo WHERE jelo_id = $1',
+      'SELECT * FROM jelo JOIN kategorija ON jelo.kategorija_id=kategorija.kategorija_id WHERE jelo_id = $1',
       [id]
     )
   
     return this.adapter.konvertuj(jelo);
+  }
+
+  async dajJelaPoIdVrednostima(ids: Array<number>) {
+    const jela = await super.izvrsiUpitVratiVise<JeloDbModel>(
+      'SELECT * FROM jelo JOIN kategorija ON jelo.kategorija_id=kategorija.kategorija_id WHERE jelo_id IN ($1:csv)',
+      [ids]
+    )
+
+    return jela.map(this.adapter.konvertuj);
   }
 }

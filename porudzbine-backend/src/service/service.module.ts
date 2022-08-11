@@ -6,6 +6,7 @@ import { AuthJwtStrategy } from 'src/strategy/auth-jwt.strategy';
 import { JeloService } from './jelo.service';
 import { KategorijaService } from './kategorija.service';
 import { KorisnikService } from './korisnik.service';
+import { PorudzbinaService } from './porudzbina.service';
 
 @Module({
   imports: [
@@ -18,7 +19,13 @@ import { KorisnikService } from './korisnik.service';
     }),
     RepositoryModule,
   ],
-  providers: [KorisnikService, JeloService, KategorijaService, AuthJwtStrategy],
-  exports: [KorisnikService, JeloService, KategorijaService],
+  providers: [
+    KorisnikService,
+    JeloService,
+    KategorijaService,
+    PorudzbinaService,
+    AuthJwtStrategy,
+  ],
+  exports: [KorisnikService, JeloService, KategorijaService, PorudzbinaService],
 })
 export class ServiceModule {}
