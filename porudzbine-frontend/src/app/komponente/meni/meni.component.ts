@@ -5,7 +5,9 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { JeloService } from 'src/app/servisi/jelo.service';
 import { KorisnikService } from 'src/app/servisi/korisnik.service';
+import { PorudzbinaService } from 'src/app/servisi/porudzbina.service';
 import { Jelo } from 'src/app/tipovi';
+import { DialogInputComponent } from '../deljene/dialog-input/dialog-input.component';
 import { DialogPotvrdaComponent } from '../deljene/dialog-potvrda/dialog-potvrda.component';
 
 @Component({
@@ -16,6 +18,7 @@ import { DialogPotvrdaComponent } from '../deljene/dialog-potvrda/dialog-potvrda
 export class MeniComponent implements OnInit {
   jela: Jelo[] = [];
   filtriranaJela: Jelo[] = [];
+  selektovanaJela: Jelo[] = [];
   ucitavanje = true;
 
   constructor(
@@ -23,7 +26,8 @@ export class MeniComponent implements OnInit {
     private snackBar: MatSnackBar,
     private korisnikService: KorisnikService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private porudzbinaService: PorudzbinaService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +72,30 @@ export class MeniComponent implements OnInit {
     });
   }
 
+  naruci() {
+    const dialogRef = this.dialog.open(DialogInputComponent);
+
+    dialogRef.afterClosed().subscribe(opis => {
+      if(opis !== undefined) {
+        this.ucitavanje = true;
+        this.porudzbinaService.naruci({
+          opis,
+          jela: this.selektovanaJela.map(selektovanoJelo => selektovanoJelo.id)
+        }).pipe(finalize(() => {
+          this.ucitavanje = false;
+        })).subscribe({
+          next: () => {
+            this.snackBar.open("Uspesno ste narucili!", "skloni", { duration: 5000 });
+            this.selektovanaJela = [];
+          },
+          error: (err) => {
+            this.snackBar.open(err.message || err, "skloni", { duration: 5000 });
+          }
+        })
+      } 
+    })
+  } 
+
   daLiJeKorisnikAdmin() {
     return this.korisnikService.daLiKorisnikImaUlogu("ADMIN");
   }
@@ -87,5 +115,17 @@ export class MeniComponent implements OnInit {
     this.filtriranaJela = this.jela.filter((jelo) =>
       jelo.naziv.toLowerCase().includes(vrednost)
     );
+  }
+
+  selektujJelo(selektovano: boolean, jelo: Jelo) {
+    if(selektovano) {
+      this.selektovanaJela.push(jelo)
+    } else {
+      this.selektovanaJela = this.selektovanaJela.filter(selektovanoJelo => selektovanoJelo.id !== jelo.id);
+    }
+  }
+
+  daLiJeJeloVecSelektovano(idJela: number) {
+    return !!this.selektovanaJela.find(jelo => jelo.id === idJela);
   }
 }

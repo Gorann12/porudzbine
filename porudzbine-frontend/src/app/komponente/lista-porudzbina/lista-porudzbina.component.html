@@ -1,0 +1,20 @@
+<mat-spinner class="absolute-center" *ngIf="ucitavanje"></mat-spinner>
+<section class="container mt-sm" *ngIf="!ucitavanje">
+  <h1>Porudzbine</h1>
+  <table class="mat-table mt-xs" style="width: 100%;">
+    <tr class="mat-header-row">
+     <th class="mat-header-cell">Sifra</th>
+     <th class="mat-header-cell">Porucilac</th>
+     <th class="mat-header-cell">Napomena</th>
+     <th class="mat-header-cell">Jela</th>
+    </tr>
+    <tr class="mat-row" *ngFor="let porudzbina of porudzbine">
+      <td class="mat-cell">{{ porudzbina.id }}</td>
+      <td class="mat-cell">{{ porudzbina.korisnik.ime }}</td>
+      <td class="mat-cell">{{ porudzbina.opis | formatirajString }}</td>
+      <td class="mat-cell">
+        <p *ngFor="let jelo of porudzbina.jela" style="margin: .4rem 0;"><b>{{ jelo.naziv }}</b> - RSD{{ jelo.cena }}</p>
+      </td>
+    </tr>
+   </table>
+</section>

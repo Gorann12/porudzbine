@@ -1,7 +1,11 @@
 <mat-spinner *ngIf="ucitavanje" class="absolute-center"></mat-spinner>
 <main class="container mt-sm" *ngIf="!ucitavanje">
   <h1>Meni</h1>
-  <input class="custom-input" type="text" placeholder="Filtriraj po nazivu" (input)="filtriraj($event)">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <input class="custom-input hide-for-print" type="text" placeholder="Filtriraj po nazivu" (input)="filtriraj($event)">
+    <button mat-flat-button class="hide-for-print" color="primary" *ngIf="daLiJeKorisnikUlogovan()"
+      [disabled]="selektovanaJela.length === 0" (click)="naruci()">Naruci</button>
+  </div>
   <table class="mat-table mt-xs" style="width: 100%;">
    <tr class="mat-header-row">
     <th class="mat-header-cell">Naziv</th>
@@ -11,7 +15,8 @@
     <th class="mat-header-cell">Kategorija</th>
     <th class="mat-header-cell">Opis kategorije</th>
     <th class="mat-header-cell">Rok narucivanja</th>
-    <th class="mat-header-cell center" *ngIf="daLiJeKorisnikAdmin()">Akcije</th>
+    <th class="mat-header-cell center hide-for-print" *ngIf="daLiJeKorisnikAdmin()">Akcije</th>
+    <th class="mat-header-cell center hide-for-print" *ngIf="daLiJeKorisnikUlogovan()">Izaberi</th>
    </tr>
    <tr class="mat-row" *ngFor="let jelo of filtriranaJela">
     <td class="mat-cell">{{ jelo.naziv }}</td>
@@ -21,9 +26,13 @@
     <td class="mat-cell">{{ jelo.kategorija.naziv | formatirajString }}</td>
     <td class="mat-cell">{{ jelo.kategorija.opis | formatirajString }}</td>
     <td class="mat-cell">{{ jelo.kategorija.rok | formatirajString }}</td>
-    <td class="mat-cell" *ngIf="daLiJeKorisnikAdmin()">
+    <td class="mat-cell hide-for-print" *ngIf="daLiJeKorisnikAdmin()">
       <button mat-button color="primary" (click)="azuriraj(jelo.id)">Azuriraj</button>
       <button mat-button color="warn" (click)="izbrisi(jelo.id)">Izbrisi</button>
+    </td>
+    <td class="mat-cell center hide-for-print" *ngIf="daLiJeKorisnikUlogovan()">
+      <mat-checkbox class="example-margin" [checked]="daLiJeJeloVecSelektovano(jelo.id)"
+        (change)="selektujJelo($event.checked, jelo)"></mat-checkbox>
     </td>
    </tr>
   </table>

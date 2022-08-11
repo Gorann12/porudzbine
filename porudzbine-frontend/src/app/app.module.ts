@@ -18,6 +18,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu'; 
 import { MatSelectModule } from '@angular/material/select'; 
 import { MatDialogModule } from '@angular/material/dialog'; 
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { PrijavaComponent } from './komponente/autentifikacija/prijava/prijava.component';
 import { RegistracijaComponent } from './komponente/autentifikacija/registracija/registracija.component';
@@ -33,6 +35,8 @@ import { MeniComponent } from './komponente/meni/meni.component';
 import { FormatirajStringPipe } from './pipes/formatiraj-string.pipe';
 import { JeloFormaComponent } from './komponente/jelo-forma/jelo-forma.component';
 import { DialogPotvrdaComponent } from './komponente/deljene/dialog-potvrda/dialog-potvrda.component';
+import { DialogInputComponent } from './komponente/deljene/dialog-input/dialog-input.component';
+import { ListaPorudzbinaComponent } from './komponente/lista-porudzbina/lista-porudzbina.component';
 
 function initializeAppFactory(korisnikServis: KorisnikService): () => Observable<any> {
   return () => korisnikServis.inicijalizujKorisnika().pipe(catchError((err) => {
@@ -54,6 +58,8 @@ function initializeAppFactory(korisnikServis: KorisnikService): () => Observable
     FormatirajStringPipe,
     JeloFormaComponent,
     DialogPotvrdaComponent,
+    DialogInputComponent,
+    ListaPorudzbinaComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +77,9 @@ function initializeAppFactory(korisnikServis: KorisnikService): () => Observable
     MatTableModule,
     MatMenuModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule,
+    MatExpansionModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

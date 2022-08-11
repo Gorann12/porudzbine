@@ -67,3 +67,54 @@ a:visited {
   display: flex;
   align-items: center;
 }
+
+.hide-for-print {
+  @media print {
+    display: none !important;
+  }
+}
+
+ul {
+  list-style: none;
+
+  li {
+    line-height: 1.6;
+  }
+}
+
+.mat-table {
+  display: block;
+  box-shadow: 1px 1px 20px 20px rgba(0, 0, 0, .05);
+
+  @media print {
+    box-shadow: none;
+  }
+}
+
+.mat-row,
+.mat-header-row {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  text-align: left;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(#777, .35);
+  }
+}
+
+.mat-cell,
+.mat-header-cell {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+
+  &.center {
+    text-align: center;
+  }
+
+  &.right {
+    text-align: right;
+  }
+}
