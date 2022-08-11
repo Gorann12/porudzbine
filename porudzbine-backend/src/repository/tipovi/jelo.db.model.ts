@@ -1,4 +1,4 @@
-import { KategorijaDbModel } from "./kategorija_db_model";
+import { KategorijaDbModel } from "./kategorija.db.model";
 
 export interface JeloDbModel extends KategorijaDbModel {
   jelo_id: number;
