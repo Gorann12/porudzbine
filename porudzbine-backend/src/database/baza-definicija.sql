@@ -31,7 +31,7 @@ CREATE TABLE jelo (
 
 CREATE TABLE porudzbina (
     porudzbina_id serial PRIMARY KEY,
-    porudzbina_opis TEXT NULL,
+    porudzbina_napomena TEXT NULL,
     porudzbina_korisnik_id INT NOT NULL,
     porudzbina_status TEXT NOT NULL default 'PRIMLJENO',
     porudzbina_kreirana TIMESTAMP default (now())
@@ -55,15 +55,18 @@ INSERT INTO korisnik (korisnik_ime, korisnik_email, korisnik_sifra, korisnik_ulo
 
 INSERT INTO kategorija (kategorija_naziv, kategorija_opis, kategorija_rok)
     VALUES ('Dorucak', 'najvazniji obrok u toku dana', '9:00'),
-           ('Rucak', NULL, '11:15'),
-           ('Vecera', NULL, '18:00');
+           ('Rucak', NULL, '13:00'),
+           ('Vecera', NULL, '18:00'),
+           ('Pecenje', NULL, NULL);
 
 INSERT INTO jelo (jelo_naziv, jelo_sastojci, jelo_cena, jelo_porcija, kategorija_id)
     VALUES ('Jaja i slanine', 'Jaja, slanina', 300.00, '2 jaja, 1 slanina', 1),
-           ('Jagnjetina ispod saca', 'Jagnjetina, krompir', 1250.00, '500gr', 2),
+           ('Jagnjetina ispod saca', 'Jagnjetina, krompir', 1250.00, '500gr', 4),
+           ('Saran na rostilju', 'Saran, bareni krompir', 1050, '700gr', 4),
+           ('Pilav', 'Pirinac, belo meso', 300, '150gr i pirinac i meso', 2),
            ('Supa', 'Brokoli, rezanca, sargarepa', 125.50, NULL, 3);
 
-INSERT INTO porudzbina (porudzbina_opis, porudzbina_korisnik_id) 
+INSERT INTO porudzbina (porudzbina_napomena, porudzbina_korisnik_id) 
     VALUES (NULL, 2),
            (NULL, 3),
            ('Supa sa manje rezanaca', 2);

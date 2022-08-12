@@ -18,7 +18,7 @@
           <mat-chip [color]="dajBojuZaTrenutniStatus(porudzbina.status)" class="smaller-chip" selected>{{ porudzbina.status }}</mat-chip>
         </mat-chip-list>
       </td>
-      <td class="mat-cell">{{ porudzbina.opis | formatirajString }}</td>
+      <td class="mat-cell">{{ porudzbina.napomena | formatirajString }}</td>
       <td class="mat-cell">
         <p *ngFor="let jelo of porudzbina.jela" style="margin: .4rem 0;"><b>{{ jelo.naziv }}</b> - RSD {{ jelo.cena }}</p>
       </td>

@@ -85,11 +85,11 @@ export class MeniComponent implements OnInit {
   naruci() {
     const dialogRef = this.dialog.open(DialogInputComponent);
 
-    dialogRef.afterClosed().subscribe(opis => {
-      if(opis !== undefined) {
+    dialogRef.afterClosed().subscribe(napomena => {
+      if(napomena !== undefined) {
         this.ucitavanje = true;
         this.porudzbinaService.naruci({
-          opis,
+          napomena,
           jela: this.selektovanaJela.map(selektovanoJelo => selektovanoJelo.id)
         }).pipe(finalize(() => {
           this.ucitavanje = false;

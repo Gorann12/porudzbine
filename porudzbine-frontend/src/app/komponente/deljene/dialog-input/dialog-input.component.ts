@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dialog-input.component.scss']
 })
 export class DialogInputComponent implements OnInit {
-  opis: string | null = null;
+  napomena: string | null = null;
 
   constructor() { }
 

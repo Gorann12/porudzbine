@@ -34,8 +34,8 @@ export class PorudzbinaRepository extends BaseRepository {
 
   async kreirajPorudzbinu(idKorisnika: number, podaci: PodaciZaPorucivanje) {
     const idPorudzbine = await super.izvrsiUpitVratiJedan<{ porudzbina_id: number }>(
-      'INSERT INTO porudzbina(porudzbina_opis, porudzbina_korisnik_id) VALUES ($1, $2) RETURNING porudzbina_id',
-      [podaci.opis, idKorisnika]
+      'INSERT INTO porudzbina(porudzbina_napomena, porudzbina_korisnik_id) VALUES ($1, $2) RETURNING porudzbina_id',
+      [podaci.napomena, idKorisnika]
     )
 
     for(const jelo of podaci.jela) {

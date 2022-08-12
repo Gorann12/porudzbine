@@ -41,7 +41,7 @@ export class PorudzbinaDbAdapter {
     return {
       id: model.porudzbina_id,
       kreirana: model.porudzbina_kreirana,
-      opis: model.porudzbina_opis,
+      napomena: model.porudzbina_napomena,
       status: model.porudzbina_status
     }
   }

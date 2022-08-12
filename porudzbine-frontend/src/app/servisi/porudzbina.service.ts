@@ -12,7 +12,7 @@ export class PorudzbinaService {
 
   constructor(private http: HttpClient, private korisnikService: KorisnikService) { }
 
-  naruci(podaci: { opis: string | null, jela: number[] }) {
+  naruci(podaci: { napomena: string | null, jela: number[] }) {
     const token = this.korisnikService.dajToken();
     
     return this.http.post(`${this.rootUrl}/`, podaci, {

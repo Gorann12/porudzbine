@@ -18,7 +18,7 @@ export class PorudzbinaService {
     return this.porudzbinaRepo.dajSveZaKorisnika(id);
   }
 
-  async poruci(idKorisnika: number, podaci: { opis: string | null, jela: Array<number> }) {
+  async poruci(idKorisnika: number, podaci: { napomena: string | null, jela: Array<number> }) {
     let jela = await this.jeloRepo.dajJelaPoIdVrednostima(podaci.jela);
 
     jela = jela.filter((jelo) => !this.daLiJeProsaoRokZaJelo(jelo));
@@ -29,7 +29,7 @@ export class PorudzbinaService {
 
     await this.porudzbinaRepo.kreirajPorudzbinu(idKorisnika, {
       jela: jela.map(jelo => ({ cena: jelo.cena, naziv: jelo.naziv, id: jelo.id })),
-      opis: podaci.opis
+      napomena: podaci.napomena
     })
   }
 

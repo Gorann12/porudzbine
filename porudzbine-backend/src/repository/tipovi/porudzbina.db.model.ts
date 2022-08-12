@@ -5,7 +5,7 @@ import { KorisnikDbModel } from "./korisnik.db.model";
 
 export interface PorudzbinaDbModel extends KorisnikDbModel {
   porudzbina_id: number;
-  porudzbina_opis: string | null;
+  porudzbina_napomena: string | null;
   porudzbina_korisnik_id: number;
   porudzbina_status: StatusPorudzbine;
   porudzbina_kreirana: string;

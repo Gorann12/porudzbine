@@ -3,7 +3,7 @@ import { Korisnik } from "./korisnik.tipovi";
 
 export interface Porudzbina {
   id: number;
-  opis: string | null;
+  napomena: string | null;
   korisnik: Omit<Korisnik, 'sifra'>;
   status: StatusPorudzbine;
   kreirana: string;

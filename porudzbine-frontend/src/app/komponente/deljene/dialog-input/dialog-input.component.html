@@ -3,11 +3,11 @@
   <p>Imate li neku napomenu za ovu narudzbinu?</p>
   <mat-form-field appearance="fill" style="width: 100%;">
     <mat-label>Napomena</mat-label>
-    <textarea matInput [(ngModel)]="opis" style="width: 100%;"></textarea>
+    <textarea matInput [(ngModel)]="napomena" style="width: 100%;"></textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions class="flex-desno-poravnanje">
-  <button mat-flat-button [mat-dialog-close]="opis" color="primary">Potvrdi</button>
+  <button mat-flat-button [mat-dialog-close]="napomena" color="primary">Potvrdi</button>
   <button mat-button [mat-dialog-close]="undefined" color="primary">Odustani</button>
 </div>
 
