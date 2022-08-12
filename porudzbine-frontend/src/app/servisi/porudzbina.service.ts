@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Porudzbina } from '../tipovi';
+import { Porudzbina, StatusPorudzbine } from '../tipovi';
 import { KorisnikService } from './korisnik.service';
 
 @Injectable({
@@ -36,6 +36,16 @@ export class PorudzbinaService {
     const token = this.korisnikService.dajToken();
 
     return this.http.get<Porudzbina[]>(`${this.rootUrl}/korisnik`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+
+  promeniStatusPorudzbine(idPorudzbine: number, status: StatusPorudzbine) {
+    const token = this.korisnikService.dajToken();
+
+    return this.http.patch<void>(`${this.rootUrl}/${idPorudzbine}`, { status }, {
       headers: {
         Authorization: `Bearer ${token}`
       }

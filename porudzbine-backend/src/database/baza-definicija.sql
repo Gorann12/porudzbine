@@ -53,10 +53,10 @@ INSERT INTO korisnik (korisnik_ime, korisnik_email, korisnik_sifra, korisnik_ulo
            ('Ivan Ivanovic', 'ivan@gmail.com', '$2a$12$c9kp0O9IiFoJA5hycufU7OrbToXjzXhKG24wVVyHl6gIwssGOHfX6', 'KORISNIK'),
            ('Milinko Milinkovic', 'milinko@gmail.com', '$2a$12$c9kp0O9IiFoJA5hycufU7OrbToXjzXhKG24wVVyHl6gIwssGOHfX6', 'KORISNIK');
 
-INSERT INTO kategorija (kategorija_naziv, kategorija_opis)
-    VALUES ('Dorucak', 'najvazniji obrok u toku dana'),
-           ('Rucak', NULL),
-           ('Vecera', NULL);
+INSERT INTO kategorija (kategorija_naziv, kategorija_opis, kategorija_rok)
+    VALUES ('Dorucak', 'najvazniji obrok u toku dana', '9:00'),
+           ('Rucak', NULL, '11:15'),
+           ('Vecera', NULL, '18:00');
 
 INSERT INTO jelo (jelo_naziv, jelo_sastojci, jelo_cena, jelo_porcija, kategorija_id)
     VALUES ('Jaja i slanine', 'Jaja, slanina', 300.00, '2 jaja, 1 slanina', 1),

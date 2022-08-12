@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { PrijavaComponent } from './komponente/autentifikacija/prijava/prijava.component';
 import { RegistracijaComponent } from './komponente/autentifikacija/registracija/registracija.component';
@@ -79,7 +80,8 @@ function initializeAppFactory(korisnikServis: KorisnikService): () => Observable
     MatSelectModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatChipsModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

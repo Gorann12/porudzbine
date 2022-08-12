@@ -32,7 +32,7 @@
     </td>
     <td class="mat-cell center hide-for-print" *ngIf="daLiJeKorisnikUlogovan()">
       <mat-checkbox class="example-margin" [checked]="daLiJeJeloVecSelektovano(jelo.id)"
-        (change)="selektujJelo($event.checked, jelo)"></mat-checkbox>
+        (click)="selektujJelo($event, jelo)"></mat-checkbox>
     </td>
    </tr>
   </table>

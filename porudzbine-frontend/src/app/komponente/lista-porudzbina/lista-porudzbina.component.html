@@ -5,15 +5,28 @@
     <tr class="mat-header-row">
      <th class="mat-header-cell">Sifra</th>
      <th class="mat-header-cell">Porucilac</th>
+     <th class="mat-header-cell">Status</th>
      <th class="mat-header-cell">Napomena</th>
      <th class="mat-header-cell">Jela</th>
+     <th class="mat-header-cell center hide-for-print" *ngIf="daLiJeKorisnikAdmin()">Akcije</th>
     </tr>
     <tr class="mat-row" *ngFor="let porudzbina of porudzbine">
       <td class="mat-cell">{{ porudzbina.id }}</td>
       <td class="mat-cell">{{ porudzbina.korisnik.ime }}</td>
+      <td class="mat-cell">
+        <mat-chip-list>
+          <mat-chip [color]="dajBojuZaTrenutniStatus(porudzbina.status)" class="smaller-chip" selected>{{ porudzbina.status }}</mat-chip>
+        </mat-chip-list>
+      </td>
       <td class="mat-cell">{{ porudzbina.opis | formatirajString }}</td>
       <td class="mat-cell">
         <p *ngFor="let jelo of porudzbina.jela" style="margin: .4rem 0;"><b>{{ jelo.naziv }}</b> - RSD{{ jelo.cena }}</p>
+      </td>
+      <td class="mat-cell center hide-for-print" *ngIf="daLiJeKorisnikAdmin()">
+        <button mat-button color="accent" (click)="promovisiStatusPorudzbine(porudzbina)"
+          [disabled]="daLiJeZavrsenaPorudzbina(porudzbina.status)">
+          {{ dajTekstZaSledeciStatus(porudzbina.status) }}
+        </button>
       </td>
     </tr>
    </table>

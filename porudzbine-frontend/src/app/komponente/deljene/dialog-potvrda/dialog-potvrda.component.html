@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Brisanje jela</h2>
-<mat-dialog-content>Da li ste sigurni da zelite da obrisete jelo?</mat-dialog-content>
+<h2 mat-dialog-title>{{ data.title }}</h2> 
+<mat-dialog-content>{{ data.content }}</mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">Ne</button>
-  <button mat-button [mat-dialog-close]="true">Da</button>
+  <button mat-button [mat-dialog-close]="false" *ngIf="data.akcije.ne">{{ data.akcije.ne }}</button>
+  <button mat-button [mat-dialog-close]="true" *ngIf="data.akcije.da">{{ data.akcije.da }}</button>
 </mat-dialog-actions>

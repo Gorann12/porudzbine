@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { iif, retry, share, Subject, switchMap, takeUntil, timer } from 'rxjs';
 import { KorisnikService } from 'src/app/servisi/korisnik.service';
 import { PorudzbinaService } from 'src/app/servisi/porudzbina.service';
-import { Porudzbina } from 'src/app/tipovi';
+import { Porudzbina, StatusPorudzbine } from 'src/app/tipovi';
 
 @Component({
   selector: 'app-lista-porudzbina',
@@ -52,7 +52,59 @@ export class ListaPorudzbinaComponent implements OnInit, OnDestroy {
     this.expandovanId = idPorudzbine;
   }
 
+  daLiJeKorisnikAdmin() {
+    return this.korisnikServis.daLiKorisnikImaUlogu("ADMIN");
+  }
+
+  promovisiStatusPorudzbine(porudzbina: Porudzbina) {
+    let status = porudzbina.status;
+
+    if(porudzbina.status === StatusPorudzbine.primljeno) {
+      status = StatusPorudzbine.preuzeto;
+    } else if(porudzbina.status === StatusPorudzbine.preuzeto) {
+      status = StatusPorudzbine.zavrseno;
+    }
+
+    this.porudzbineServis.promeniStatusPorudzbine(porudzbina.id, status).subscribe({
+      error: (err) => {
+        this.snackBar.open(`Nesto je poslo po zlu pri promeni statusa ${err.message}!`, 'skloni', { duration: 5000 });
+      }
+    })
+
+    this.porudzbine = this.porudzbine.map((trenutnaPorudzbina) =>
+      trenutnaPorudzbina.id === porudzbina.id ? {
+        ...trenutnaPorudzbina,
+        status
+      } : trenutnaPorudzbina
+    );
+  }
+
+  dajTekstZaSledeciStatus(status: StatusPorudzbine) {
+    if(status === StatusPorudzbine.primljeno) {
+      return "Preuzmi";
+    } else if(status === StatusPorudzbine.preuzeto) {
+      return "Zavrsi";
+    } else {
+      return "Gotovo"
+    }
+  }
+
+  dajBojuZaTrenutniStatus(status: StatusPorudzbine) {
+    if(status === StatusPorudzbine.primljeno) {
+      return "primary";
+    } else if(status === StatusPorudzbine.preuzeto) {
+      return "accent";
+    } else {
+      return "warn";
+    }
+  }
+
+  daLiJeZavrsenaPorudzbina(status: StatusPorudzbine) {
+    return status === StatusPorudzbine.zavrseno;
+  }
+
   ngOnDestroy() {
     this.stopPolling.next();
   }
+  
 }

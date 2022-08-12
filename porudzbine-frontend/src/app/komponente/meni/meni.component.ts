@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -54,7 +55,16 @@ export class MeniComponent implements OnInit {
   }
 
   izbrisi(id: number) {
-    const dialogRef = this.dialog.open(DialogPotvrdaComponent);
+    const dialogRef = this.dialog.open(DialogPotvrdaComponent, {
+      data: {
+        title: "Brisanje jela",
+        content: "Da li ste sigurni da zelite da obrisete jelo?",
+        akcije: {
+          da: 'Da',
+          ne: 'Ne'
+        }
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
@@ -94,7 +104,27 @@ export class MeniComponent implements OnInit {
         })
       } 
     })
-  } 
+  }
+
+  private parsirajVreme(vreme: number) {
+    return vreme.toString().padStart(2, '0');
+  }
+
+  daLiJeIstekaoRokZaNarucivanje(rok: string | null) {
+    if(!rok) {
+      return false;
+    }
+
+    const datum = new Date();
+    const trenutnoVreme = `${this.parsirajVreme(
+      datum.getHours()
+    )}:${this.parsirajVreme(datum.getMinutes())}:${this.parsirajVreme(
+      datum.getSeconds()
+    )}`;
+    const neutralniDatum = '1/1/1999';
+
+    return Date.parse(`${neutralniDatum} ${trenutnoVreme}`) > Date.parse(`${neutralniDatum} ${rok}`);
+  }
 
   daLiJeKorisnikAdmin() {
     return this.korisnikService.daLiKorisnikImaUlogu("ADMIN");
@@ -117,8 +147,23 @@ export class MeniComponent implements OnInit {
     );
   }
 
-  selektujJelo(selektovano: boolean, jelo: Jelo) {
-    if(selektovano) {
+  selektujJelo(event: MouseEvent, jelo: Jelo) {
+    event.preventDefault();
+    if(!this.daLiJeJeloVecSelektovano(jelo.id)) {
+      if(this.daLiJeIstekaoRokZaNarucivanje(jelo.kategorija.rok)) {
+        this.dialog.open(DialogPotvrdaComponent, {
+          data: {
+            title: "Nazalost ne mozete naruciti ovo jelo",
+            content: `Prosao je rok za narucivanje ovog jela(${jelo.kategorija.rok})`,
+            akcije: {
+              da: 'OK',
+            }
+          }
+        });
+
+        return;
+      }
+
       this.selektovanaJela.push(jelo)
     } else {
       this.selektovanaJela = this.selektovanaJela.filter(selektovanoJelo => selektovanoJelo.id !== jelo.id);
