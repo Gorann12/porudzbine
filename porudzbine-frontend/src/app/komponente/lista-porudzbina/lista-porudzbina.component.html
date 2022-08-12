@@ -20,10 +20,10 @@
       </td>
       <td class="mat-cell">{{ porudzbina.opis | formatirajString }}</td>
       <td class="mat-cell">
-        <p *ngFor="let jelo of porudzbina.jela" style="margin: .4rem 0;"><b>{{ jelo.naziv }}</b> - RSD{{ jelo.cena }}</p>
+        <p *ngFor="let jelo of porudzbina.jela" style="margin: .4rem 0;"><b>{{ jelo.naziv }}</b> - RSD {{ jelo.cena }}</p>
       </td>
       <td class="mat-cell center hide-for-print" *ngIf="daLiJeKorisnikAdmin()">
-        <button mat-button color="accent" (click)="promovisiStatusPorudzbine(porudzbina)"
+        <button mat-button color="primary" (click)="promovisiStatusPorudzbine(porudzbina)"
           [disabled]="daLiJeZavrsenaPorudzbina(porudzbina.status)">
           {{ dajTekstZaSledeciStatus(porudzbina.status) }}
         </button>

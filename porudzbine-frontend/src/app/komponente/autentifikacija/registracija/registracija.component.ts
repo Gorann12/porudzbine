@@ -50,7 +50,7 @@ export class RegistracijaComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error: (e) => {
-          const poruka = e.error.message;
+          const poruka = e?.error?.message;
           this.snackBar.open(
             Array.isArray(poruka) ? poruka.join(',') : poruka,
             'skloni',

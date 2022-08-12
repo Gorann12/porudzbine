@@ -42,7 +42,7 @@ export class ListaPorudzbinaComponent implements OnInit, OnDestroy {
           this.ucitavanje = false;
         },
         error: (err) => {
-          this.snackBar.open(err.message || err, "skloni", { duration: 5000 });
+          this.snackBar.open(err?.error?.message || err, "skloni", { duration: 5000 });
           this.ucitavanje = false;
         },
       });
@@ -67,7 +67,7 @@ export class ListaPorudzbinaComponent implements OnInit, OnDestroy {
 
     this.porudzbineServis.promeniStatusPorudzbine(porudzbina.id, status).subscribe({
       error: (err) => {
-        this.snackBar.open(`Nesto je poslo po zlu pri promeni statusa ${err.message}!`, 'skloni', { duration: 5000 });
+        this.snackBar.open(`Nesto je poslo po zlu pri promeni statusa ${err?.error?.message}!`, 'skloni', { duration: 5000 });
       }
     })
 

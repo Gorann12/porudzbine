@@ -45,7 +45,7 @@ export class MeniComponent implements OnInit {
           this.filtriranaJela = jela;
         },
         error: (err) => {
-          this.snackBar.open(err.message, 'skloni', { duration: 5000 });
+          this.snackBar.open(err?.error?.message, 'skloni', { duration: 5000 });
         },
       });
   }
@@ -72,7 +72,7 @@ export class MeniComponent implements OnInit {
         this.jeloServis.izbrisiJelo(id).subscribe({
           error: (err) => {
             this.jela = backup;
-            this.snackBar.open(err.message, 'skloni', { duration: 5000 })
+            this.snackBar.open(err?.error?.message, 'skloni', { duration: 5000 })
           }
         })
 
@@ -99,7 +99,7 @@ export class MeniComponent implements OnInit {
             this.selektovanaJela = [];
           },
           error: (err) => {
-            this.snackBar.open(err.message || err, "skloni", { duration: 5000 });
+            this.snackBar.open(err?.error?.message || err, "skloni", { duration: 5000 });
           }
         })
       } 
@@ -154,7 +154,7 @@ export class MeniComponent implements OnInit {
         this.dialog.open(DialogPotvrdaComponent, {
           data: {
             title: "Nazalost ne mozete naruciti ovo jelo",
-            content: `Prosao je rok za narucivanje ovog jela(${jelo.kategorija.rok})`,
+            content: `Prosao je rok za narucivanje ovog jela (${jelo.kategorija.rok})`,
             akcije: {
               da: 'OK',
             }

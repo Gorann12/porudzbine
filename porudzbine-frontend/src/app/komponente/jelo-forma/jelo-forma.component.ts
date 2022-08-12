@@ -66,7 +66,7 @@ export class JeloFormaComponent implements OnInit {
         }
       },
       error: (e) => {
-        const poruka = e.error.message || '';
+        const poruka = e?.error?.message || '';
         this.snackBar.open(Array.isArray(poruka) ? poruka.join(', ') : poruka, 'skloni', { duration: 5000 })
       }
     })
@@ -112,7 +112,7 @@ export class JeloFormaComponent implements OnInit {
         }
       },
       error: (e) => {
-        const poruka = e.error.message;
+        const poruka = e?.error?.message;
         this.snackBar.open(
           Array.isArray(poruka) ? poruka.join(',') : poruka,
           'skloni',
