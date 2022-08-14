@@ -134,6 +134,10 @@ export class MeniComponent implements OnInit {
     return this.korisnikService.daLiKorisnikImaUlogu("KORISNIK");
   }
 
+  daLiJeGost() {
+    return this.korisnikService.daLiKorisnikImaUlogu("GOST");
+  }
+
   filtriraj(evt: Event) {
     const inputZaFiltriranje = evt.target as HTMLInputElement;
     const vrednost = inputZaFiltriranje.value.toLowerCase();

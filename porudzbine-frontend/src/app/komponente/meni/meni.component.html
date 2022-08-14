@@ -1,6 +1,7 @@
 <mat-spinner *ngIf="ucitavanje" class="absolute-center"></mat-spinner>
 <main class="container mt-sm" *ngIf="!ucitavanje">
   <h1>Meni</h1>
+  <p *ngIf="daLiJeGost()">* Morate se ulogovati da biste porucili!</p>
   <div style="display: flex; justify-content: space-between; align-items: center;">
     <input class="custom-input hide-for-print" type="text" placeholder="Filtriraj po nazivu" (input)="filtriraj($event)">
     <button mat-flat-button class="hide-for-print" color="primary" *ngIf="daLiJeKorisnikUlogovan()"
