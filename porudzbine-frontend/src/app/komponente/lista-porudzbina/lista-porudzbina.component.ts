@@ -12,7 +12,6 @@ import { Porudzbina, StatusPorudzbine } from 'src/app/tipovi';
 })
 export class ListaPorudzbinaComponent implements OnInit, OnDestroy {
   private stopPolling = new Subject<void>();
-  expandovanId: number = -1;
   ucitavanje: boolean = true;
   porudzbine: Porudzbina[] = [];
 
@@ -46,10 +45,6 @@ export class ListaPorudzbinaComponent implements OnInit, OnDestroy {
           this.ucitavanje = false;
         },
       });
-  }
-
-  postaviExpandovanId(idPorudzbine: number) {
-    this.expandovanId = idPorudzbine;
   }
 
   daLiJeKorisnikAdmin() {
