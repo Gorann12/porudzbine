@@ -4,6 +4,7 @@ import { Jelo } from "src/modeli/jelo.model";
 import { StatusPorudzbine } from "src/modeli/porudzbina.model";
 import { JeloRepository } from "src/repository/jelo.repository";
 import { PorudzbinaRepository } from "src/repository/porudzbina.repository";
+import { JeloService } from "./jelo.service";
 
 @Injectable()
 export class PorudzbinaService {
@@ -19,9 +20,12 @@ export class PorudzbinaService {
   }
 
   async poruci(idKorisnika: number, podaci: { napomena: string | null, jela: Array<number> }) {
-    let jela = await this.jeloRepo.dajJelaPoIdVrednostima(podaci.jela);
+    const jela = await this.jeloRepo.dajJelaPoIdVrednostima(podaci.jela);
+    const daLiSuSvaJelaValidna = jela.every(jelo => !this.daLiJeProsaoRokZaJelo(jelo));
 
-    jela = jela.filter((jelo) => !this.daLiJeProsaoRokZaJelo(jelo));
+    if(!daLiSuSvaJelaValidna) {
+      throw new Error("Ne smete porucivati jelo iz kategorije kojoj je istekao rok porucivanja!");
+    }
 
     if(jela.length === 0) {
       throw new Error("Morate poruciti bar jedno jelo!");
