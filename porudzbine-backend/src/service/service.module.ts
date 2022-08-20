@@ -7,6 +7,7 @@ import { JeloService } from './jelo.service';
 import { KategorijaService } from './kategorija.service';
 import { KorisnikService } from './korisnik.service';
 import { PorudzbinaService } from './porudzbina.service';
+import { StoService } from './sto.service';
 
 @Module({
   imports: [
@@ -24,8 +25,9 @@ import { PorudzbinaService } from './porudzbina.service';
     JeloService,
     KategorijaService,
     PorudzbinaService,
+    StoService,
     AuthJwtStrategy,
   ],
-  exports: [KorisnikService, JeloService, KategorijaService, PorudzbinaService],
+  exports: [KorisnikService, JeloService, KategorijaService, PorudzbinaService, StoService],
 })
 export class ServiceModule {}

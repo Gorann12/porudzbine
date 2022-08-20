@@ -47,6 +47,11 @@ CREATE TABLE porudzbina_jelo (
     CONSTRAINT pj_jelo_id_fk FOREIGN KEY (pj_jelo_id) REFERENCES jelo(jelo_id)
 );
 
+CREATE TABLE sto (
+    sto_id serial PRIMARY KEY,
+    sto_oznaka TEXT NOT NULL
+);
+
 -- Sifra za svakog korisnika je testSifra 
 INSERT INTO korisnik (korisnik_ime, korisnik_email, korisnik_sifra, korisnik_uloga)
     VALUES ('Djordje Djordjevic', 'dj@gmail.com', '$2a$12$c9kp0O9IiFoJA5hycufU7OrbToXjzXhKG24wVVyHl6gIwssGOHfX6', 'ADMIN'), 
@@ -76,3 +81,10 @@ INSERT INTO porudzbina_jelo (pj_porudzbina_id, pj_jelo_id, pj_jelo_cena, pj_jelo
            (2, 2, 1250.50, 'Jagnjetina ispod saca'),
            (3, 2, 125, 'Supa'),
            (3, 2, 125, 'Jaja i slanine');
+
+INSERT INTO sto (sto_oznaka)
+    VALUES ('11a'),
+           ('11b'),
+           ('12'),
+           ('13'),
+           ('13c');

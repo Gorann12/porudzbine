@@ -1,10 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import { utcToZonedTime, format } from "date-fns-tz";
+import { format } from "date-fns-tz";
 import { Jelo } from "src/modeli/jelo.model";
 import { StatusPorudzbine } from "src/modeli/porudzbina.model";
 import { JeloRepository } from "src/repository/jelo.repository";
 import { PorudzbinaRepository } from "src/repository/porudzbina.repository";
-import { JeloService } from "./jelo.service";
 
 @Injectable()
 export class PorudzbinaService {
