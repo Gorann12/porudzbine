@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Jelo } from "src/modeli/jelo.model";
 import { Porudzbina } from "src/modeli/porudzbina.model";
+import { Sto } from "src/modeli/sto.model";
 import { PorudzbinaDbModel } from "../tipovi";
 
 @Injectable()
@@ -15,6 +16,7 @@ export class PorudzbinaDbAdapter {
       const porudzbina: Porudzbina = {
         ...this.dajPodatkeOPorudzbini(dbModel) as Omit<Porudzbina, 'korisnik' | 'jela'>,
         ...this.dajPodatkeOKorisniku(dbModel) as Pick<Porudzbina, 'korisnik'>,
+        ...this.dajPodatkeOStolu(dbModel) as Pick<Porudzbina, 'sto'>,
         jela: [this.dajPodatkeOJelu(dbModel) as Pick<Jelo, 'cena' | 'naziv'>]
       };
 
@@ -37,7 +39,15 @@ export class PorudzbinaDbAdapter {
     return Object.keys(mapaPorudzbina).map(kljuc => mapaPorudzbina[kljuc]);
   }
 
-  private dajPodatkeOPorudzbini(model: PorudzbinaDbModel): Omit<Porudzbina, 'korisnik' | 'jela'> {
+  private dajPodatkeOStolu(model: PorudzbinaDbModel): Pick<Porudzbina, "sto"> {
+    return {
+      sto: {
+        oznaka: model.sto_oznaka
+      }
+    }
+  }
+
+  private dajPodatkeOPorudzbini(model: PorudzbinaDbModel): Omit<Porudzbina, 'korisnik' | 'jela' | 'sto'> {
     return {
       id: model.porudzbina_id,
       kreirana: model.porudzbina_kreirana,

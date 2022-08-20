@@ -7,7 +7,6 @@ export class StoDbAdapter {
   
   konvertuj(model: StoDbModel): Sto {
     return model ? {
-      id: model.sto_id,
       oznaka: model.sto_oznaka
     } : null;
   }

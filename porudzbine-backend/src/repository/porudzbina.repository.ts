@@ -16,7 +16,7 @@ export class PorudzbinaRepository extends BaseRepository {
 
   async dajSvePorudzbine() {
     const porudzbine = await super.izvrsiUpitVratiVise<PorudzbinaDbModel>(
-      'SELECT * FROM porudzbina JOIN korisnik ON porudzbina_korisnik_id=korisnik_id JOIN porudzbina_jelo ON porudzbina_id=pj_porudzbina_id', 
+      'SELECT * FROM porudzbina JOIN korisnik ON porudzbina_korisnik_id=korisnik_id JOIN sto ON porudzbina_sto_id=sto_oznaka JOIN porudzbina_jelo ON porudzbina_id=pj_porudzbina_id', 
       []
     );
 
@@ -25,7 +25,7 @@ export class PorudzbinaRepository extends BaseRepository {
 
   async dajSveZaKorisnika(idKorisnika: number) {
     const porudzbine = await super.izvrsiUpitVratiVise<PorudzbinaDbModel>(
-      'SELECT * FROM porudzbina JOIN korisnik ON porudzbina_korisnik_id=korisnik_id JOIN porudzbina_jelo ON porudzbina_id=pj_porudzbina_id WHERE porudzbina_korisnik_id=$1',
+      'SELECT * FROM porudzbina JOIN korisnik ON porudzbina_korisnik_id=korisnik_id JOIN sto ON porudzbina_sto_id=sto_oznaka JOIN porudzbina_jelo ON porudzbina_id=pj_porudzbina_id WHERE porudzbina_korisnik_id=$1',
       [idKorisnika]
     )
 
