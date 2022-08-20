@@ -86,11 +86,12 @@ export class MeniComponent implements OnInit {
   naruci() {
     const dialogRef = this.dialog.open(DialogInputComponent);
 
-    dialogRef.afterClosed().subscribe(napomena => {
-      if(napomena !== undefined) {
+    dialogRef.afterClosed().subscribe((podaciZaPorucivanje: { napomena: string | null, stoId: string } | undefined) => {
+      if(podaciZaPorucivanje !== undefined) {
         this.ucitavanje = true;
         this.porudzbinaService.naruci({
-          napomena,
+          napomena: podaciZaPorucivanje.napomena,
+          sto: podaciZaPorucivanje.stoId,
           jela: this.selektovanaJela.map(selektovanoJelo => selektovanoJelo.id)
         }).pipe(finalize(() => {
           this.ucitavanje = false;
@@ -178,7 +179,7 @@ export class MeniComponent implements OnInit {
 
   postaviSelektovanaJela(jela: Jelo[]) {
     this.selektovanaJela = jela;
-    this.ukupnaCenaSelektovanihJela = this.selektovanaJela.reduce((ukupnaCena, jelo) => ukupnaCena + jelo.cena, 0);
+    this.ukupnaCenaSelektovanihJela = +this.selektovanaJela.reduce((ukupnaCena, jelo) => ukupnaCena + jelo.cena, 0).toFixed(2);
   }
 
   daLiJeJeloVecSelektovano(idJela: number) {

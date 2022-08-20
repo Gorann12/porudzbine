@@ -24,7 +24,6 @@ import { MatChipsModule } from '@angular/material/chips';
 
 import { PrijavaComponent } from './komponente/autentifikacija/prijava/prijava.component';
 import { RegistracijaComponent } from './komponente/autentifikacija/registracija/registracija.component';
-import { OmotacFormeComponent } from './komponente/deljene/omotac-forme/omotac-forme.component';
 import { NavbarComponent } from './komponente/navbar/navbar.component';
 import { NavbarAdminComponent } from './komponente/navbar/navbar-admin/navbar-admin.component';
 import { NavbarKorisnikComponent } from './komponente/navbar/navbar-korisnik/navbar-korisnik.component';
@@ -50,7 +49,6 @@ function initializeAppFactory(korisnikServis: KorisnikService): () => Observable
     AppComponent,
     PrijavaComponent,
     RegistracijaComponent,
-    OmotacFormeComponent,
     NavbarComponent,
     NavbarAdminComponent,
     NavbarKorisnikComponent,

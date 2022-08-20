@@ -54,7 +54,22 @@ a:visited {
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.05);
 }
 
-// utility klase
+.omotac-forme {
+  width: 100%;
+  margin-top: 10rem;
+
+  form {
+    max-width: 30rem;
+    padding: 1rem;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, .15);
+    margin: 0 auto;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+}
+
 .mt-sm {
   margin-top: 2rem;
 }
