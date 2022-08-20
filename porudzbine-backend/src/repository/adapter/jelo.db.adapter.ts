@@ -8,7 +8,7 @@ export class JeloDbAdapter {
   konvertuj(model: JeloDbModel): Jelo {
     return model ? {
       id: model.jelo_id,
-      cena: model.jelo_cena,
+      cena: parseFloat(model.jelo_cena),
       naziv: model.jelo_naziv,
       porcija: model.jelo_porcija,
       sastojci: model.jelo_sastojci,

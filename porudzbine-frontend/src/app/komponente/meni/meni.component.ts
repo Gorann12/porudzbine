@@ -20,6 +20,7 @@ export class MeniComponent implements OnInit {
   jela: Jelo[] = [];
   filtriranaJela: Jelo[] = [];
   selektovanaJela: Jelo[] = [];
+  ukupnaCenaSelektovanihJela = 0;
   ucitavanje = true;
 
   constructor(
@@ -96,7 +97,7 @@ export class MeniComponent implements OnInit {
         })).subscribe({
           next: () => {
             this.snackBar.open("Uspesno ste narucili!", "skloni", { duration: 5000 });
-            this.selektovanaJela = [];
+            this.postaviSelektovanaJela([]);
           },
           error: (err) => {
             this.snackBar.open(err?.error?.message || err, "skloni", { duration: 5000 });
@@ -168,10 +169,16 @@ export class MeniComponent implements OnInit {
         return;
       }
 
-      this.selektovanaJela.push(jelo)
+      this.postaviSelektovanaJela([...this.selektovanaJela, jelo]);
     } else {
-      this.selektovanaJela = this.selektovanaJela.filter(selektovanoJelo => selektovanoJelo.id !== jelo.id);
+      const jelaBezTrenutnoUklonjenogJela = this.selektovanaJela.filter(selektovanoJelo => selektovanoJelo.id !== jelo.id);
+      this.postaviSelektovanaJela(jelaBezTrenutnoUklonjenogJela);
     }
+  }
+
+  postaviSelektovanaJela(jela: Jelo[]) {
+    this.selektovanaJela = jela;
+    this.ukupnaCenaSelektovanihJela = this.selektovanaJela.reduce((ukupnaCena, jelo) => ukupnaCena + jelo.cena, 0);
   }
 
   daLiJeJeloVecSelektovano(idJela: number) {

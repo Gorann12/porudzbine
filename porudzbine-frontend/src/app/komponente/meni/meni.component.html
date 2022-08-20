@@ -5,7 +5,7 @@
   <div style="display: flex; justify-content: space-between; align-items: center;">
     <input class="custom-input hide-for-print" type="text" placeholder="Filtriraj po nazivu" (input)="filtriraj($event)">
     <button mat-flat-button class="hide-for-print" color="primary" *ngIf="daLiJeKorisnikUlogovan()"
-      [disabled]="selektovanaJela.length === 0" (click)="naruci()">Naruci</button>
+      [disabled]="selektovanaJela.length === 0" (click)="naruci()">Naruci ({{ ukupnaCenaSelektovanihJela }}RSD)</button>
   </div>
   <table class="mat-table mt-xs" style="width: 100%;">
    <tr class="mat-header-row">

@@ -14,7 +14,7 @@ export class KreirajJeloDto {
   porcija: string;
   
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumber({ maxDecimalPlaces: 2 }, { message: 'Maksimalno 2 decimalna mesta za cenu!' })
   cena: number;
 
   @IsNotEmpty()
