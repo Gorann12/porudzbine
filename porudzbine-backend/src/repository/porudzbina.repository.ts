@@ -1,11 +1,11 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { IDatabase } from "pg-promise";
 import { PG_CONNECTION } from "src/database/db.provider";
-import { Porudzbina, StatusPorudzbine } from "src/modeli/porudzbina.model";
-import { PodaciZaPorucivanje, PorudzbinaProsirenoJelo } from "src/utils/tipovi";
+import { StatusPorudzbine } from "src/modeli/porudzbina.model";
+import { ProsireniPodaciZaPorucivanje } from "src/utils/tipovi";
 import { PorudzbinaDbAdapter } from "./adapter/porudzbina.db.adapter";
 import { BaseRepository } from "./base.repository";
-import { PorudzbinaDbModel, PorudzbinDbModelProsirenoJelo } from "./tipovi";
+import { PorudzbinaDbModel } from "./tipovi";
 
 @Injectable()
 export class PorudzbinaRepository extends BaseRepository {
@@ -32,10 +32,10 @@ export class PorudzbinaRepository extends BaseRepository {
     return this.adapter.konvertuj(porudzbine);
   }
 
-  async kreirajPorudzbinu(idKorisnika: number, podaci: PodaciZaPorucivanje) {
+  async kreirajPorudzbinu(idKorisnika: number, podaci: ProsireniPodaciZaPorucivanje) {
     const idPorudzbine = await super.izvrsiUpitVratiJedan<{ porudzbina_id: number }>(
-      'INSERT INTO porudzbina(porudzbina_napomena, porudzbina_korisnik_id) VALUES ($1, $2) RETURNING porudzbina_id',
-      [podaci.napomena, idKorisnika]
+      'INSERT INTO porudzbina(porudzbina_napomena, porudzbina_sto_id, porudzbina_ukupan_iznos, porudzbina_korisnik_id) VALUES ($1, $2, $3, $4) RETURNING porudzbina_id',
+      [podaci.napomena, podaci.sto, podaci.ukupanIznos, idKorisnika]
     )
 
     for(const jelo of podaci.jela) {

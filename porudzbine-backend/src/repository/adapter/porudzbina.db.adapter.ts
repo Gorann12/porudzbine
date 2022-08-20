@@ -52,7 +52,8 @@ export class PorudzbinaDbAdapter {
       id: model.porudzbina_id,
       kreirana: model.porudzbina_kreirana,
       napomena: model.porudzbina_napomena,
-      status: model.porudzbina_status
+      status: model.porudzbina_status,
+      ukupanIznos: parseFloat(model.porudzbina_ukupan_iznos)
     }
   }
 

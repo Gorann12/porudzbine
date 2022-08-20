@@ -9,6 +9,7 @@ export interface Porudzbina {
   sto: Sto;
   status: StatusPorudzbine;
   kreirana: string;
+  ukupanIznos: number;
   jela: Pick<Jelo, "cena" | "naziv">[]
 }
 

@@ -9,6 +9,7 @@ export interface PorudzbinaDbModel extends KorisnikDbModel, StoDbModel {
   porudzbina_napomena: string | null;
   porudzbina_korisnik_id: number;
   porudzbina_sto_id: string;
+  porudzbina_ukupan_iznos: string;
   porudzbina_status: StatusPorudzbine;
   porudzbina_kreirana: string;
   pj_porudzbina_id: number;

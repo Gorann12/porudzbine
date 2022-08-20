@@ -40,6 +40,7 @@ CREATE TABLE porudzbina (
     porudzbina_sto_id TEXT NOT NULL,
     porudzbina_status TEXT NOT NULL default 'PRIMLJENO',
     porudzbina_kreirana TIMESTAMP default (now()),
+    porudzbina_ukupan_iznos DECIMAL NOT NULL,
 
     CONSTRAINT porudzbina_korisnik_id_fk FOREIGN KEY (porudzbina_korisnik_id) REFERENCES korisnik(korisnik_id),
     CONSTRAINT porudzbina_sto_id_fk FOREIGN KEY (porudzbina_sto_id) REFERENCES sto(sto_oznaka)
@@ -81,13 +82,13 @@ INSERT INTO jelo (jelo_naziv, jelo_sastojci, jelo_cena, jelo_porcija, kategorija
            ('Pilav', 'Pirinac, belo meso', 300, '150gr i pirinac i meso', 2),
            ('Supa', 'Brokoli, rezanca, sargarepa', 125.50, NULL, 3);
 
-INSERT INTO porudzbina (porudzbina_napomena, porudzbina_korisnik_id, porudzbina_sto_id) 
-    VALUES (NULL, 2, '11a'),
-           (NULL, 3, '11b'),
-           ('Supa sa manje rezanaca', 2, '13c');
+INSERT INTO porudzbina (porudzbina_napomena, porudzbina_korisnik_id, porudzbina_sto_id, porudzbina_ukupan_iznos) 
+    VALUES (NULL, 2, '11a', 300),
+           (NULL, 3, '11b', 1250.50),
+           ('Supa sa manje rezanaca', 2, '13c', 425.50);
 
 INSERT INTO porudzbina_jelo (pj_porudzbina_id, pj_jelo_id, pj_jelo_cena, pj_jelo_naziv)
     VALUES (1, 1, 300, 'Jaja i slanine'),
            (2, 2, 1250.50, 'Jagnjetina ispod saca'),
-           (3, 2, 125, 'Supa'),
-           (3, 2, 125, 'Jaja i slanine');
+           (3, 2, 125.50, 'Supa'),
+           (3, 2, 300, 'Jaja i slanine');
