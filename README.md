@@ -51,8 +51,8 @@
 
 ## 5. Steps to stop the app (universal, not dependant on the OS)
   1. Assuming you did everything correctly you should have two git bash instances, you should press ctrl + c in each of them (that will terminate processes which are running or local servers for both backend and frontend)
-  3. If you closed both terminal instances, open new (location doesn't matter you can even click right click on desktop and press "git bash here") and type
-    - for linux
-      - sudo docker stop pgDatabaseContainer
-    - for windows
-      - docker stop pgDatabaseContainer
+  3. If you closed both terminal instances, open new (location doesn't matter you can even click right click on desktop and press: for windows "git bash here", for linux "open in terminal") and type:
+  - for linux:
+    - sudo docker stop pgDatabaseContainer
+  - for windows: 
+    - docker stop pgDatabaseContainer
