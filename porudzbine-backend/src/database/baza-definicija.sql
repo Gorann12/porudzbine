@@ -48,12 +48,12 @@ CREATE TABLE porudzbina (
 
 CREATE TABLE porudzbina_jelo (
     pj_porudzbina_id INT NOT NULL,
-    pj_jelo_id INT NOT NULL,
+    pj_jelo_id INT,
     pj_jelo_cena DECIMAL NOT NULL,
     pj_jelo_naziv TEXT NOT NULL,
 
     CONSTRAINT pj_porudzbina_id_fk FOREIGN KEY (pj_porudzbina_id) REFERENCES porudzbina(porudzbina_id),
-    CONSTRAINT pj_jelo_id_fk FOREIGN KEY (pj_jelo_id) REFERENCES jelo(jelo_id)
+    CONSTRAINT pj_jelo_id_fk FOREIGN KEY (pj_jelo_id) REFERENCES jelo(jelo_id) ON DELETE SET NULL
 );
 
 -- Sifra za svakog korisnika je testSifra 
@@ -90,5 +90,5 @@ INSERT INTO porudzbina (porudzbina_napomena, porudzbina_korisnik_id, porudzbina_
 INSERT INTO porudzbina_jelo (pj_porudzbina_id, pj_jelo_id, pj_jelo_cena, pj_jelo_naziv)
     VALUES (1, 1, 300, 'Jaja i slanine'),
            (2, 2, 1250.50, 'Jagnjetina ispod saca'),
-           (3, 2, 125.50, 'Supa'),
-           (3, 2, 300, 'Jaja i slanine');
+           (3, 5, 125.50, 'Supa'),
+           (3, 1, 300, 'Jaja i slanine');
